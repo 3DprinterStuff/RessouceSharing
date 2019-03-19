@@ -155,4 +155,4 @@ if __name__ == "__main__":
     server = serverLib.Server("test2")
     for user in server.users.values():
         user.contacts = list(server.users.values())
-    app.run()
+    app.run(host='0.0.0.0')
