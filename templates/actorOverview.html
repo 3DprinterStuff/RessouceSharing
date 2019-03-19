@@ -1,0 +1,51 @@
+<h1>{{user.name}}</h1>
+<h2>Inventar</h2>
+<form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"></form>
+<ul id="userInventory">
+{% for category,items in categories.items() %}
+<h2>{{category.name}}</h2>
+<ul>
+  {% for item in items %}
+  <li>
+   <form method="POST" action="/actors/%s/deleteItem">
+    <input name="name" value="%s" type="hidden"/>
+	<input value="X" type="submit"/>
+   </form>
+  <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> {{item.desireability}}
+  </li>
+  {% endfor %}
+</ul>
+{% endfor %}
+
+<h2>no categories</h2>
+<ul>
+{% for item in noCategories %}
+   <li>
+     <form method="POST" action="/actors/%s/deleteItem">
+	  <input name="name" value="{{item.name}}" type="hidden"/>
+	  <input value="X" type="submit"/>
+	 </form>
+	 <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> {{item.desireability}}
+   </li>
+{% endfor %}
+</ul>
+</ul>
+
+<form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"></form>
+<h2>Wunschliste</h2>
+<form method="POST" action="/actors/{{user.name}}/addDesire"> <input name="name"/> <input type="submit"></form>
+<ul id="userDesires">
+{% for query in user.desires %}
+  <li>
+     <form method="POST" action="/actors/{{user.name}}/deleteDesire">
+	   <input name="name" value="{{user.name}}" type="hidden"/>
+	   <input value="X" type="submit"/>
+	 </form> {{query.name}}
+  </li>
+{% endfor %}
+</ul>
+<form method="POST" action="/actors/{{user.name}}/addDesire"> <input name="name"/> <input type="submit"></form>
+
+<pre>
+{{ressourceText}}
+</pre>
