@@ -87,18 +87,8 @@ def showItem(user_id,show_item):
     if not foundItem:
         return "item not found", 404
 
-    result = ''
-    result += '<h1>%s</h1>'%(foundItem.name)
-    result += '<a href="/actors/%s">actor</a>'%(user.name)
-    result += '<form action="/actors/%s/item/%s/edit" method="POST"/>'%(user.name,item.name)
-    result += '<div><textarea name="description">%s</textarea></div>'%(foundItem.description)
-    result += '<div><input name="desireability" value="%s"></div>'%(foundItem.desireability)
-    result += '<div><input name="categories" value="%s"></div>'%(','.join(map(lambda x: x.name, foundItem.categories)))
-    result += '<div><input name="wikidata_id" value="%s"></div>'%(foundItem.wikidata_id)
-    result += '<input type="submit" value="save"/>'
-    result += '</form>'
-    return render_template('item.html',user=user,item=item)
-    return result
+    categories = (','.join(map(lambda x: x.name, foundItem.categories)))
+    return render_template('item.html',user=user,item=item,categories=categories)
 
 
 @app.route("/actors/<user_id>/addDesire",methods = ['POST','GET'])

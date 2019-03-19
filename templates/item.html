@@ -1,9 +1,9 @@
- <h1>%s</h1>'%(foundItem.name)
- <a href="/actors/%s">actor</a>'%(user.name)
- <form action="/actors/%s/item/%s/edit" method="POST"/>'%(user.name,item.name)
- <div><textarea name="description">%s</textarea></div>'%(foundItem.description)
- <div><input name="desireability" value="%s"></div>'%(foundItem.desireability)
- <div><input name="categories" value="%s"></div>'%(','.join(map(lambda x: x.name, foundItem.categories)))
- <div><input name="wikidata_id" value="%s"></div>'%(foundItem.wikidata_id)
+ <h1>{{item.name}}s</h1>
+ <a href="/actors/{{user.name}}">actor</a>
+ <form action="/actors/{{user.name}}/item/{{item.name}}/edit" method="POST"/>
+ <div><textarea name="description">{{item.description}}</textarea></div>
+ <div><input name="desireability" value="{{item.desireability}}"></div>
+ <div><input name="categories" value="{{categories}}"></div>
+ <div><input name="wikidata_id" value="{{item.wikidata_id}}"></div>
  <input type="submit" value="save"/>
  </form>
