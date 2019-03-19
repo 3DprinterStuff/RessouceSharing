@@ -1,3 +1,7 @@
+{% extends "basic.html" %}
+
+{% block content %}
+
 <h1>{{user.name}}</h1>
 <h2>Inventar</h2>
 <form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"></form>
@@ -49,3 +53,5 @@
 <pre>
 {{ressourceText}}
 </pre>
+
+{% endblock %}

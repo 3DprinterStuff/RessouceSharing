@@ -1,3 +1,7 @@
+{% extends "basic.html" %}
+
+{% block content %}
+
  <h1>{{item.name}}</h1>
  <a href="/actors/{{user.name}}">actor</a>
  <form action="/actors/{{user.name}}/item/{{item.name}}/edit" method="POST"/>
@@ -7,3 +11,5 @@
  <div><input name="wikidata_id" value="{{item.wikidata_id}}"></div>
  <input type="submit" value="save"/>
  </form>
+
+{% endblock %}
