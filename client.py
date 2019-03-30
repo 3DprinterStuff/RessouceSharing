@@ -1,9 +1,31 @@
 import json
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, session
 
 import server as serverLib
 
 app = Flask(__name__)
+
+@app.route("/login",methods = ['GET'])
+def login():
+    if 'username' in session:
+        return session['username']
+    else:
+        session['username'] = "hurhur"
+    return "login"
+
+@app.route("/newActor",methods = ['GET'])
+def showCreateUserForm():
+    return render_template('newUser.html')
+
+@app.route("/newActor",methods = ['POST'])
+def createUser():
+    if request.form.get("name") in server.users:
+        return "user already exists", 401
+
+    user = serverLib.Actor(request.form.get("name"))
+    server.users[user.name] = user
+    store()
+    return redirect("actors/%s"%(user.id),code=302)
 
 @app.route("/actors/<user_id>/deleteDesire",methods = ['POST'])
 def deleteQuery(user_id):
@@ -123,6 +145,10 @@ def addItem(user_id):
 def explore():
     return render_template('explore.html')
 
+@app.route("/list",methods = ['GET'])
+def listUsers():
+    return render_template('list.html',users=server.users.values())
+
 @app.route("/actors/<user_id>")
 def showActor(user_id):
     if not user_id in server.users:
@@ -152,7 +178,9 @@ def store():
     return ''
 
 if __name__ == "__main__":
+    app.secret_key = 'sadlkJDSALKASDAIUSdgasdjlkajdöASFH'
     server = serverLib.Server("test2")
     for user in server.users.values():
         user.contacts = list(server.users.values())
     app.run(host='0.0.0.0',debug=True)
+    app.config['SESSION_TYPE'] = 'filesystem'

@@ -1,0 +1,14 @@
+{% extends "basic.html" %}
+
+{% block content %}
+
+<ul>
+{% for user in users %}
+ <li>
+  <a href="/actors/{{user.name}}">{{user.name}}</a>
+ </form>
+ </li>
+{% endfor %}
+</ul>
+
+{% endblock %}
