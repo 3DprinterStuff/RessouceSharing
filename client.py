@@ -6,12 +6,13 @@ import server as serverLib
 app = Flask(__name__)
 
 @app.route("/login",methods = ['GET'])
+def loginForm():
+    return render_template('login.html')
+
+@app.route("/login",methods = ['POST'])
 def login():
-    if 'username' in session:
-        return session['username']
-    else:
-        session['username'] = "hurhur"
-    return "login"
+    session['username'] = request.form.get("name")
+    return redirect("/",code=302)
 
 @app.route("/newActor",methods = ['GET'])
 def showCreateUserForm():
