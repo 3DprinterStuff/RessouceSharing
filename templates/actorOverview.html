@@ -11,9 +11,9 @@
 <ul>
   {% for item in items %}
   <li>
-   <form method="POST" action="/actors/%s/deleteItem">
+   <form method="POST" action="/actors/{{user.name}}/deleteItem">
     <input name="name" value="%s" type="hidden"/>
-	<input value="X" type="submit"/>
+    <input value="X" type="submit"/>
    </form>
   <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> {{item.desireability}}
   </li>
@@ -25,7 +25,7 @@
 <ul>
 {% for item in noCategories %}
    <li>
-     <form method="POST" action="/actors/%s/deleteItem">
+	 <form method="POST" action="/actors/{{user.name}}/deleteItem">
 	  <input name="name" value="{{item.name}}" type="hidden"/>
 	  <input value="X" type="submit"/>
 	 </form>
@@ -44,7 +44,7 @@
      <form method="POST" action="/actors/{{user.name}}/deleteDesire">
 	   <input name="name" value="{{user.name}}" type="hidden"/>
 	   <input value="X" type="submit"/>
-	 </form> {{query.name}}
+     </form> {{query.name}}
   </li>
 {% endfor %}
 </ul>
