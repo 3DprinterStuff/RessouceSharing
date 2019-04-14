@@ -38,9 +38,9 @@ Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input nam
 Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"></form>
 <h2>Wunschliste</h2>
 
-{% if user.compartments %}
 <h2>compartments</h2>
 Add Compartment: <form method="POST" action="/actors/{{user.name}}/addCompartment"> <input name="name"/> <input type="submit"></form>
+{% if user.compartments %}
 <ul>
 {% for compartmentName,items in compartments.items() %}
 <li>
