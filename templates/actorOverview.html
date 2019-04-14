@@ -15,7 +15,7 @@
     <input name="name" value="{{item.name}}" type="hidden"/>
     <input value="X" type="submit"/>
    </form>
-  <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> {{item.desireability}}
+   <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> | {{item.amount}} | {{item.desireability}} 
   </li>
   {% endfor %}
 </ul>
@@ -29,7 +29,7 @@
 	  <input name="name" value="{{item.name}}" type="hidden"/>
 	  <input value="X" type="submit"/>
 	 </form>
-	 <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> {{item.desireability}}
+	 <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> | {{item.amount}} | {{item.desireability}}
    </li>
 {% endfor %}
 </ul>
@@ -48,7 +48,7 @@
 	    <input name="name" value="{{item.name}}" type="hidden"/>
 	    <input value="X" type="submit"/>
 	   </form>
-	   <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> {{item.desireability}}
+	   <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> | {{item.amount}} | {{item.desireability}}
           </li>
 	{% endfor %}
 	</ul>
