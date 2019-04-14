@@ -1,4 +1,7 @@
 {
    "actors":[ 
+              {"name":"me","inventory":["a","b","c","d"]},
+			  {"name":"p1","inventory":[]},
+			  {"name":"p2","inventory":[]}
 			]
 }

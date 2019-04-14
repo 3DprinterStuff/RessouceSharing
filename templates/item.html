@@ -5,10 +5,10 @@
  <h1>{{item.name}}</h1>
  <a href="/actors/{{user.name}}">actor</a>
  <form action="/actors/{{user.name}}/item/{{item.name}}/edit" method="POST"/>
- <div><textarea name="description">{{item.description}}</textarea></div>
- <div><input name="desireability" value="{{item.desireability}}"></div>
- <div><input name="categories" value="{{categories}}"></div>
- <div><input name="wikidata_id" value="{{item.wikidata_id}}"></div>
+ <div>Description: <textarea name="description">{{item.description}}</textarea></div>
+ <div>Desireability: <input name="desireability" value="{{item.desireability}}">(0=do not care, -5=i realy want it gone, 5=i realy want to keep it</div>
+ <div>Categories: <input name="categories" value="{{categories}}">(comma seperated, example: material,trash)</div>
+ <div>Wikidata Id: <input name="wikidata_id" value="{{item.wikidata_id}}"></div>
  <input type="submit" value="save"/>
  </form>
 
