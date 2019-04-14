@@ -13,9 +13,9 @@ Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input nam
   <li>
    <form method="POST" action="/actors/{{user.name}}/deleteItem">
     <input name="name" value="{{item.name}}" type="hidden"/>
-    <input value="X" type="submit"/>
+    <input value="X" type="submit" title="delete item"/>
    </form>
-   <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> | {{item.amount}} | {{item.desireability}} 
+   <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> | <span title="amount">{{item.amount}}</span> | <span title="desirebility">{{item.desireability}}</span>
   </li>
   {% endfor %}
 </ul>
@@ -27,9 +27,9 @@ Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input nam
    <li>
 	 <form method="POST" action="/actors/{{user.name}}/deleteItem">
 	  <input name="name" value="{{item.name}}" type="hidden"/>
-	  <input value="X" type="submit"/>
+	  <input value="X" type="submit" title="delete item"/>
 	 </form>
-	 <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> | {{item.amount}} | {{item.desireability}}
+	 <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> | <span title="amount">{{item.amount}}</span> | <span title="desireability">{{item.desireability}}</span>
    </li>
 {% endfor %}
 </ul>
@@ -49,9 +49,9 @@ Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input nam
 	  <li>
 	   <form method="POST" action="/actors/{{user.name}}/deleteItem">
 	    <input name="name" value="{{item.name}}" type="hidden"/>
-	    <input value="X" type="submit"/>
+	    <input value="X" type="submit" title="delete item"/>
 	   </form>
-	   <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> | {{item.amount}} | {{item.desireability}}
+	   <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> | <span title="amount">{{item.amount}}</span> | <span title="desireability">{{item.desireability}}</span>
           </li>
 	{% endfor %}
 	</ul>
@@ -66,7 +66,7 @@ Add Desire: <form method="POST" action="/actors/{{user.name}}/addDesire"> <input
   <li>
      <form method="POST" action="/actors/{{user.name}}/deleteDesire">
 	   <input name="name" value="{{user.name}}" type="hidden"/>
-	   <input value="X" type="submit"/>
+	   <input value="X" type="submit" title="delete desire"/>
      </form> {{query.name}}
   </li>
 {% endfor %}
