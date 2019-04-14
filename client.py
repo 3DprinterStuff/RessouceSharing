@@ -167,7 +167,19 @@ def showActor(user_id):
                 categories[category] = []
             categories[category].append(item)
 
-    return render_template('actorOverview.html',user=user,categories=categories,noCategories=noCategories,ressourceText=serverLib.findRessources(user))
+    compartments = {}
+    for compartment in user.compartments:
+        compartments[compartment.name] = []
+
+    for item in user.inventory:
+        print(item.compartment)
+        if not item.compartment:
+            continue
+        if not item.compartment in compartments:
+            continue
+        compartments[item.compartment].append(item)
+
+    return render_template('actorOverview.html',user=user,categories=categories,noCategories=noCategories,ressourceText=serverLib.findRessources(user),compartments=compartments)
 
 @app.route("/")
 def hello():

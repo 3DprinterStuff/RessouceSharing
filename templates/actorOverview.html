@@ -35,6 +35,28 @@
 </ul>
 </ul>
 
+{% if user.compartments %}
+<h2>compartments</h2>
+<ul>
+{% for compartmentName,items in compartments.items() %}
+<li>
+	<a href="/actors/{{user.name}}/compartment/{{compartmentName}}">{{compartmentName}}</a>
+	<ul>
+	{% for item in items %}
+	  <li>
+	   <form method="POST" action="/actors/{{user.name}}/deleteItem">
+	    <input name="name" value="{{item.name}}" type="hidden"/>
+	    <input value="X" type="submit"/>
+	   </form>
+	   <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> {{item.desireability}}
+          </li>
+	{% endfor %}
+	</ul>
+</li>
+{% endfor %}
+</ul>
+{% endif %}
+
 <form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"></form>
 <h2>Wunschliste</h2>
 <form method="POST" action="/actors/{{user.name}}/addDesire"> <input name="name"/> <input type="submit"></form>

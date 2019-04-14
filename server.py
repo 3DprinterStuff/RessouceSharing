@@ -18,6 +18,10 @@ class Instance(object):
     def AgetInventory(actor, personId):
         self.people[personId].AgetInventory(actor)
 
+class Compartment(object):
+    def __init__(self,name):
+        self.name = name
+
 class Actor(object):
     def __init__(self,name):
         self.name = name
@@ -25,6 +29,7 @@ class Actor(object):
         self.inventory = []
         self.places = []
         self.contacts = []
+        self.compartments = []
         self.id = name
 
         self.inbox = []
@@ -174,6 +179,7 @@ class Thing(object):
         self.holder = None
         self.wikidata_id = None
         self.desireability = 0
+        self.compartment = None
     
     def IchangeCategories(self,actor,categories):
         self.categories = categories
@@ -230,11 +236,17 @@ class Server(object):
                          thing.description = rawItem["description"]
                      if "wikidata_id" in rawItem:
                          thing.wikidata_id = rawItem["wikidata_id"]
+                     if "compartment" in rawItem:
+                         thing.compartment = rawItem["compartment"]
                      user.inventory.append(thing)
 
              if "desires" in rawUser:
                  for rawDesire in rawUser["desires"]:
                      user.desires.append(Query(rawDesire["name"]))
+    
+             if "compartments" in rawUser:
+                 for rawCompartment in rawUser["compartments"]:
+                     user.compartments.append(Compartment(rawCompartment["name"]))
     
      def store(self,dataset):
          rawData = {}
