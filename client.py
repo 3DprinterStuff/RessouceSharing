@@ -86,6 +86,7 @@ def editItem(user_id,item_id):
     foundItem.desireability = request.form.get("desireability")
     foundItem.wikidata_id = request.form.get("wikidata_id")
     foundItem.compartment = request.form.get("compartment")
+    foundItem.amount = request.form.get("amount")
     categories = []
     for category_id in request.form.get("categories").split(","):
         category_id = category_id.strip()

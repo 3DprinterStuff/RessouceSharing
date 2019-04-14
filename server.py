@@ -180,6 +180,7 @@ class Thing(object):
         self.wikidata_id = None
         self.desireability = 0
         self.compartment = None
+        self.amount = None
     
     def IchangeCategories(self,actor,categories):
         self.categories = categories
@@ -238,6 +239,8 @@ class Server(object):
                          thing.wikidata_id = rawItem["wikidata_id"]
                      if "compartment" in rawItem:
                          thing.compartment = rawItem["compartment"]
+                     if "amount" in rawItem:
+                         thing.amount = rawItem["amount"]
                      user.inventory.append(thing)
 
              if "desires" in rawUser:
@@ -264,6 +267,7 @@ class Server(object):
                  rawItem["wikidata_id"] = item.wikidata_id
                  rawItem["description"] = item.description
                  rawItem["compartment"] = item.compartment
+                 rawItem["amount"] = item.amount
                  rawItem["categories"] = list(map(lambda x: x.name, item.categories))
                  rawUser["inventory"].append(rawItem)
 
