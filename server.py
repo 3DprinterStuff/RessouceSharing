@@ -263,6 +263,7 @@ class Server(object):
                  rawItem["desireability"] = item.desireability
                  rawItem["wikidata_id"] = item.wikidata_id
                  rawItem["description"] = item.description
+                 rawItem["compartment"] = item.compartment
                  rawItem["categories"] = list(map(lambda x: x.name, item.categories))
                  rawUser["inventory"].append(rawItem)
 

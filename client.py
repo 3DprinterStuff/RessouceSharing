@@ -85,6 +85,7 @@ def editItem(user_id,item_id):
     foundItem.description = request.form.get("description")
     foundItem.desireability = request.form.get("desireability")
     foundItem.wikidata_id = request.form.get("wikidata_id")
+    foundItem.compartment = request.form.get("compartment")
     categories = []
     for category_id in request.form.get("categories").split(","):
         category_id = category_id.strip()
@@ -172,7 +173,6 @@ def showActor(user_id):
         compartments[compartment.name] = []
 
     for item in user.inventory:
-        print(item.compartment)
         if not item.compartment:
             continue
         if not item.compartment in compartments:
