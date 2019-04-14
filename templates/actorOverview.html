@@ -4,7 +4,7 @@
 
 <h1>{{user.name}}</h1>
 <h2>Inventar</h2>
-<form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"></form>
+Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"></form>
 <ul id="userInventory">
 {% for category,items in categories.items() %}
 <h2>{{category.name}}</h2>
@@ -35,6 +35,9 @@
 </ul>
 </ul>
 
+Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"></form>
+<h2>Wunschliste</h2>
+
 {% if user.compartments %}
 <h2>compartments</h2>
 <ul>
@@ -57,9 +60,7 @@
 </ul>
 {% endif %}
 
-<form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"></form>
-<h2>Wunschliste</h2>
-<form method="POST" action="/actors/{{user.name}}/addDesire"> <input name="name"/> <input type="submit"></form>
+Add Desire: <form method="POST" action="/actors/{{user.name}}/addDesire"> <input name="name"/> <input type="submit"></form>
 <ul id="userDesires">
 {% for query in user.desires %}
   <li>
@@ -70,7 +71,7 @@
   </li>
 {% endfor %}
 </ul>
-<form method="POST" action="/actors/{{user.name}}/addDesire"> <input name="name"/> <input type="submit"></form>
+Add Desire: <form method="POST" action="/actors/{{user.name}}/addDesire"> <input name="name"/> <input type="submit"></form>
 
 <pre>
 {{ressourceText}}
