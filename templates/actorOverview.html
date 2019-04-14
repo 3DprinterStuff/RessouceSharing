@@ -12,7 +12,7 @@
   {% for item in items %}
   <li>
    <form method="POST" action="/actors/{{user.name}}/deleteItem">
-    <input name="name" value="%s" type="hidden"/>
+    <input name="name" value="{{item.name}}" type="hidden"/>
     <input value="X" type="submit"/>
    </form>
   <a href="/actors/{{user.name}}/item/{{item.name}}">{{item.name}}</a> {{item.desireability}}
