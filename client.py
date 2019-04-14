@@ -115,6 +115,19 @@ def showItem(user_id,show_item):
     categories = (','.join(map(lambda x: x.name, foundItem.categories)))
     return render_template('item.html',user=user,item=item,categories=categories)
 
+@app.route("/actors/<user_id>/addCompartment",methods = ['POST','GET'])
+def addCompartment(user_id):
+    if not user_id in server.users:
+        return "user not found", 404
+    user = server.users[user_id]
+
+    if request.method == 'GET':
+        return '<form method="POST" action="/actors/%s/addCompartment"> <input name="name"/> <input type="submit"></form>'%(user_id)
+    if request.method == 'POST':
+        print(request.form.get("name"))
+        user.compartments.append(serverLib.Compartment(request.form.get("name")))
+        store()
+        return redirect("actors/%s"%(user_id), code=302)
 
 @app.route("/actors/<user_id>/addDesire",methods = ['POST','GET'])
 def addDesire(user_id):

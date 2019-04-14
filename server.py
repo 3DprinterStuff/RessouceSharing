@@ -259,6 +259,10 @@ class Server(object):
              rawUser["name"] = actor.name
              rawUser["inventory"] = []
              rawUser["desires"] = []
+             if actor.compartments:
+                 rawUser["compartments"] = []
+                 for compartment in actor.compartments:
+                     rawUser["compartments"].append({"name":compartment.name})
 
              for item in actor.inventory:
                  rawItem = {}

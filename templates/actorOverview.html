@@ -40,6 +40,7 @@ Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input nam
 
 {% if user.compartments %}
 <h2>compartments</h2>
+Add Compartment: <form method="POST" action="/actors/{{user.name}}/addCompartment"> <input name="name"/> <input type="submit"></form>
 <ul>
 {% for compartmentName,items in compartments.items() %}
 <li>
