@@ -157,6 +157,18 @@ def addItem(user_id):
         store()
         return redirect("actors/%s"%(user_id), code=302)
 
+@app.route("/actors/<user_id>/compartment/<compartment_id>/delete",methods = ['POST','GET'])
+def deleteCompartment(user_id,compartment_id):
+    if not user_id in server.users:
+        return "user not found", 404
+    user = server.users[user_id]
+
+    for compartment in user.compartments:
+        if compartment_id == compartment.name:
+            user.compartments.remove(compartment)
+
+    return redirect("actors/%s"%(user_id), code=302)
+
 @app.route("/explore",methods = ['POST','GET'])
 def explore():
     return render_template('explore.html')

@@ -35,16 +35,16 @@ Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input nam
 </ul>
 </ul>
 
-Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"></form>
+Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"/></form>
 <h2>Wunschliste</h2>
 
 <h2>compartments</h2>
-Add Compartment: <form method="POST" action="/actors/{{user.name}}/addCompartment"> <input name="name"/> <input type="submit"></form>
+Add Compartment: <form method="POST" action="/actors/{{user.name}}/addCompartment"> <input name="name"/> <input type="submit"/></form>
 {% if user.compartments %}
 <ul>
 {% for compartmentName,items in compartments.items() %}
 <li>
-	<a href="/actors/{{user.name}}/compartment/{{compartmentName}}">{{compartmentName}}</a>
+	<form method="POST" action="/actors/{{user.name}}/compartment/{{compartmentName}}/delete"><input value="X" type="submit"/> <a href="/actors/{{user.name}}/compartment/{{compartmentName}}">{{compartmentName}}</a></form>
 	<ul>
 	{% for item in items %}
 	  <li>
