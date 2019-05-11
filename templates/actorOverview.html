@@ -36,8 +36,6 @@ Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input nam
 </ul>
 
 Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"/></form>
-<h2>Wunschliste</h2>
-
 <h2>compartments</h2>
 Add Compartment: <form method="POST" action="/actors/{{user.name}}/addCompartment"> <input name="name"/> <input type="submit"/></form>
 {% if user.compartments %}
@@ -45,7 +43,8 @@ Add Compartment: <form method="POST" action="/actors/{{user.name}}/addCompartmen
 {% for compartmentName,items in compartments.items() %}
 <li>
 	<form method="POST" action="/actors/{{user.name}}/compartment/{{compartmentName}}/delete"><input value="X" type="submit"/> <a href="/actors/{{user.name}}/compartment/{{compartmentName}}">{{compartmentName}}</a></form>
-	<ul>
+	<button onclick="toggle('compartment_{{compartmentName}}')">~</button>
+	<ul id="compartment_{{compartmentName}}">
 	{% for item in items %}
 	  <li>
 	   <form method="POST" action="/actors/{{user.name}}/deleteItem">
@@ -60,6 +59,8 @@ Add Compartment: <form method="POST" action="/actors/{{user.name}}/addCompartmen
 {% endfor %}
 </ul>
 {% endif %}
+
+<h2>Wunschliste</h2>
 
 Add Desire: <form method="POST" action="/actors/{{user.name}}/addDesire"> <input name="name"/> <input type="submit"></form>
 <ul id="userDesires">
