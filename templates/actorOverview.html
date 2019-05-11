@@ -7,8 +7,8 @@
 Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"></form>
 <ul id="userInventory">
 {% for category,items in categories.items() %}
-<h2>{{category.name}}</h2>
-<ul>
+<h3 onclick="toggle('categoryList_{{category.name}}')">{{category.name}}</h3>
+<ul id="categoryList_{{category.name}}">
   {% for item in items %}
   <li>
    <form method="POST" action="/actors/{{user.name}}/deleteItem">
@@ -21,7 +21,7 @@ Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input nam
 </ul>
 {% endfor %}
 
-<h2>no categories</h2>
+<h3>no categories</h3>
 <ul>
 {% for item in noCategories %}
    <li>
