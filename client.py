@@ -230,6 +230,14 @@ def deleteCompartment(user_id,compartment_id):
 def explore():
     return render_template('explore.html')
 
+@app.route("/actions",methods = ['POST','GET'])
+def listActions():
+    return render_template('actions.html')
+
+@app.route("/actions/relocation",methods = ['POST','GET'])
+def startRelocation():
+    return render_template('startRelocation.html')
+
 @app.route("/list",methods = ['GET'])
 def listUsers():
     return render_template('list.html',users=server.users.values())
