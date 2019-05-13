@@ -47,6 +47,62 @@ def deleteQuery(user_id):
     store()
     return redirect("actors/%s"%(user_id), code=302)
 
+@app.route("/actors/<user_id>/addGroup",methods = ['GET'])
+def addGroupForm(user_id):
+    if not user_id in server.users:
+        return "user not found", 404
+    user = server.users[user_id]
+
+    return "<form>form</form>"
+
+@app.route("/actors/<user_id>/addGroup",methods = ['POST'])
+def addGroup(user_id):
+    if not user_id in server.users:
+        return "user not found", 404
+    user = server.users[user_id]
+
+    user.groups.append(serverLib.Group(request.form.get("name")))
+    store()
+
+    return redirect("actors/%s"%(user_id), code=302)
+
+@app.route("/actors/<user_id>/group/<group_id>",methods = ['GET'])
+def viewGroup(user_id,group_id):
+    if not user_id in server.users:
+        return "user not found", 404
+    user = server.users[user_id]
+
+    groupFound = None
+    for group in user.groups:
+        if group.name == group_id:
+            groupFound = group
+            break
+
+    if not groupFound:
+        return "group not found", 404
+
+    return render_template('group.html',user=user,group=groupFound)
+    
+@app.route("/actors/<user_id>/deleteGroup",methods = ['POST'])
+def deleteGroup(user_id):
+    if not user_id in server.users:
+        return "user not found", 404
+    user = server.users[user_id]
+
+    name = request.form.get("name")
+
+    toKill = None
+    for group in user.groups:
+        if group.name == name:
+            toKill = group
+            break
+    if toKill:
+        user.groups.remove(toKill)
+
+    store()
+
+    return redirect("actors/%s"%(user_id), code=302)
+
 @app.route("/actors/<user_id>/deleteItem",methods = ['POST'])
 def deleteItem(user_id):
     if not user_id in server.users:

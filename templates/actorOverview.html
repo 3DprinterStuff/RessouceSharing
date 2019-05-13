@@ -3,6 +3,20 @@
 {% block content %}
 
 <h1>{{user.name}}</h1>
+<h2>Groups</h2>
+Add Group: <form method="POST" action="/actors/{{user.name}}/addGroup"> <input name="name"/> <input type="submit"></form>
+<ul>
+  {% for group in user.groups %}
+  <li>
+   <form method="POST" action="/actors/{{user.name}}/deleteGroup">
+    <input name="name" value="{{group.name}}" type="hidden"/>
+    <input value="X" type="submit" title="delete group"/>
+   </form>
+   <a href="/actors/{{user.name}}/group/{{group.name}}">{{group.name}}</a>
+  </li>
+  {% endfor %}
+</ul>
+
 <h2>Inventar</h2>
 Add Item: <form method="POST" action="/actors/{{user.name}}/addItem"> <input name="name"/> <input type="submit"></form>
 <ul id="userInventory">

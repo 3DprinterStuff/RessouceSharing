@@ -3,6 +3,12 @@ from flask import Flask,request,redirect
 
 app = Flask(__name__)
 
+class Group(object):
+    def __init__(self,name):
+        self.name = name
+        self.members = ["test1","test2"]
+        self.secretary = None
+
 class Instance(object):
     counter = 0
     def __init__(self,name,admin):
@@ -28,6 +34,7 @@ class Actor(object):
         self.desires = []
         self.inventory = []
         self.places = []
+        self.groups = []
         self.contacts = []
         self.compartments = []
         self.id = name
@@ -250,6 +257,10 @@ class Server(object):
              if "compartments" in rawUser:
                  for rawCompartment in rawUser["compartments"]:
                      user.compartments.append(Compartment(rawCompartment["name"]))
+
+             if "groups" in rawUser:
+                 for rawGroup in rawUser["groups"]:
+                     user.groups.append(Group(rawGroup["name"]))
     
      def store(self,dataset):
          rawData = {}
@@ -259,10 +270,16 @@ class Server(object):
              rawUser["name"] = actor.name
              rawUser["inventory"] = []
              rawUser["desires"] = []
+             rawUser["groups"] = []
              if actor.compartments:
                  rawUser["compartments"] = []
                  for compartment in actor.compartments:
                      rawUser["compartments"].append({"name":compartment.name})
+
+             for group in actor.groups:
+                 rawGroup = {}
+                 rawGroup["name"] = group.name
+                 rawUser["groups"].append(rawGroup)
 
              for item in actor.inventory:
                  rawItem = {}
