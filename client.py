@@ -83,6 +83,60 @@ def viewGroup(user_id,group_id):
 
     return render_template('group.html',user=user,group=groupFound)
     
+@app.route("/actors/<user_id>/group/<group_id>/inviteActor",methods = ['POST'])
+def inviteActorToGroup(user_id,group_id):
+    if not user_id in server.users:
+        return "user not found", 404
+    user = server.users[user_id]
+
+    groupFound = None
+    for group in user.groups:
+        if group.name == group_id:
+            groupFound = group
+            break
+
+    if not groupFound:
+        return "group not found", 404
+
+    invitedUser = request.form.get("name")
+    if not invitedUser in server.users:
+        return "invited user not found", 404
+    invitedUser = server.users[invitedUser]
+
+    groupFound.members.append(invitedUser)
+    invitedUser.groups.append(groupFound)
+
+    store()
+
+    return redirect("actors/%s/group/%s"%(user_id,group_id), code=302)
+    
+@app.route("/actors/<user_id>/group/<group_id>/removeActor",methods = ['POST'])
+def removeActorFromGroup(user_id,group_id):
+    if not user_id in server.users:
+        return "user not found", 404
+    user = server.users[user_id]
+
+    groupFound = None
+    for group in user.groups:
+        if group.name == group_id:
+            groupFound = group
+            break
+
+    if not groupFound:
+        return "group not found", 404
+
+    invitedUser = request.form.get("id")
+    if not invitedUser in server.users:
+        return "user to remove not found", 404
+    invitedUser = server.users[invitedUser]
+
+    groupFound.members.remove(invitedUser)
+    invitedUser.groups.remove(groupFound)
+
+    store()
+
+    return redirect("actors/%s/group/%s"%(user_id,group_id), code=302)
+
 @app.route("/actors/<user_id>/deleteGroup",methods = ['POST'])
 def deleteGroup(user_id):
     if not user_id in server.users:

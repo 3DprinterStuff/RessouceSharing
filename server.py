@@ -4,10 +4,11 @@ from flask import Flask,request,redirect
 app = Flask(__name__)
 
 class Group(object):
-    def __init__(self,name):
+    def __init__(self,name,secretary):
         self.name = name
-        self.members = ["test1","test2"]
-        self.secretary = None
+        self.id = name
+        self.members = []
+        self.secretary = secretary
 
 class Instance(object):
     counter = 0
@@ -229,6 +230,8 @@ class Server(object):
      def load(self,dataset):
          with open("%s.json"%dataset) as raw_file:
              rawData = json.loads(raw_file.read())
+
+         # add root objects
          for rawUser in rawData["actors"]:
              user = Actor(rawUser["name"])
              self.users[rawUser["name"]] = user
@@ -260,7 +263,23 @@ class Server(object):
 
              if "groups" in rawUser:
                  for rawGroup in rawUser["groups"]:
-                     user.groups.append(Group(rawGroup["name"]))
+                     if rawGroup["reference"] == True:
+                         continue
+                     user.groups.append(Group(rawGroup["name"],user))
+
+         # add group references
+         for rawUser in rawData["actors"]:
+             user = self.users[rawUser["name"]]
+             if "groups" in rawUser:
+                 for rawGroup in rawUser["groups"]:
+                     if rawGroup["reference"] == False:
+                         continue
+                     secretary = self.users[rawGroup["secretary"]]
+                     for group in secretary.groups:
+                         if group.id == rawGroup["name"]:
+                            user.groups.append(group)
+                            group.members.append(user)
+                            break
     
      def store(self,dataset):
          rawData = {}
@@ -278,7 +297,16 @@ class Server(object):
 
              for group in actor.groups:
                  rawGroup = {}
-                 rawGroup["name"] = group.name
+                 if group.secretary == actor:
+                     rawGroup["reference"] = False
+                     rawGroup["name"] = group.name
+                     rawGroup["members"] = []
+                     for member in group.members:
+                         rawGroup["members"].append(member.name)
+                 else:
+                     rawGroup["reference"] = True
+                     rawGroup["name"] = group.name
+                 rawGroup["secretary"] = group.secretary.id
                  rawUser["groups"].append(rawGroup)
 
              for item in actor.inventory:

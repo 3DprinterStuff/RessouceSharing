@@ -3,4 +3,21 @@
 {% block content %}
 
 <h1>{{group.name}}</h1>
+<h2> Members </h2>
+<ul>
+ <li>
+  <a href="/actors/{{group.secretary.name}}">{{group.secretary.name}}</a>
+ </li>
+{% for member in group.members %}
+ <li>
+  <form action="/actors/{{group.secretary.name}}/group/{{group.name}}/removeActor" method="POST"><input type="hidden" name="id" value="{{member.name}}"/><input type="submit" value="X"/></form>
+  <a href="/actors/{{member.name}}">{{member.name}}</a>
+ </li>
+{% endfor %}
+</ul>
+<form action="/actors/{{group.secretary.name}}/group/{{group.name}}/inviteActor" method="POST">
+	<input name="name"/>
+	<input type="submit"/>
+</form>
+
 {% endblock %}
