@@ -1,0 +1,12 @@
+{% extends "basic.html" %}
+
+{% block content %}
+
+<form action="/newActor" method="POST">
+    name: <input name="name"/></br>
+    password: <input type="password" name="password"/></br>
+    repeat password: <input type="password" name="password2"/></br>
+    <input type="submit" name="name" value="create user"/></br>
+</form>
+
+{% endblock %}
